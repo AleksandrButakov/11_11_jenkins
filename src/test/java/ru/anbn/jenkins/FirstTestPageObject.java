@@ -1,9 +1,15 @@
 package ru.anbn.jenkins;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.logevents.SelenideLog;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import helpers.Attach;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import ru.anbn.jenkins.pages.RegistrationPage;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
@@ -26,22 +32,42 @@ public class FirstTestPageObject {
                 downloadPicture = "img.png",
                 currentAddress = "Russia",
                 selectionState = "NCR",
-                selectionCity = "Noida";
+                selectionCity = "Delhi";
 
         @BeforeAll
         static void beforeAll() {
             Configuration.baseUrl = "https://demoqa.com";
             Configuration.browserPosition = ("0x0");
             Configuration.browserSize = "1920x1080";
+
+            // +++
+            SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
+            // адрес удаленного selenoid сервера, где user1 - login, 1234 - password, wd - webdriver
+            Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+
+            /* Jenkins не имеет графического интерфейса поэтому для тестирования web интерфейса необходимо
+               подключить selenoid
+            */
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setCapability("enableVNC", true);
+            capabilities.setCapability("enableVideo", true);
+            Configuration.browserCapabilities = capabilities;
+
         }
 
-        @AfterAll
-        static void afterAll() {
-            closeWebDriver();
+        //@AfterAll
+        // static void afterAll() {closeWebDriver();}
+
+        @AfterEach
+        void addAttachments() {
+            Attach.screenshotAs("Last screenshot");
+            Attach.pageSource();
+            Attach.browserConsoleLogs();
+            Attach.addVideo();
         }
 
         @Test
-        void successPracticeFormTest() {
+        void successPracticeFormTest() throws InterruptedException {
             // data entry
             registrationPage.openPage()
                     .setFirstName(firstName)

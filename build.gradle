@@ -59,13 +59,13 @@ tasks.withType(Test) {
    Аннотацию @Tag можно применить как к классу, в котором может быть много тестов, так и к отдельному тесту
  */
 task properties_test(type: Test) {
-    useJUnitPlatform{
+    useJUnitPlatform {
         includeTags "properties"
     }
 }
 
 task smoke_test(type: Test) {
-    useJUnitPlatform{
+    useJUnitPlatform {
         includeTags "smoke"
         // есть еще excludedTags - это те тесты которые мы хотим исключить
     }

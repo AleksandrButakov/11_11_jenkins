@@ -1,3 +1,5 @@
+// версия gradle для образца
+
 plugins {
     id 'java-library'
     id "io.qameta.allure" version "2.9.6"
@@ -52,6 +54,9 @@ tasks.withType(Test) {
     }
 }
 
+// этот блок необходим для аннатации @Tag. Если запустим тесты командой:
+// gradle clean properties_test -DsomeText=Hello
+// то выполнятся только тесты перед которыми есть аннотация @Tag
 task properties_test(type: Test) {
     useJUnitPlatform{
         includeTags "properties"

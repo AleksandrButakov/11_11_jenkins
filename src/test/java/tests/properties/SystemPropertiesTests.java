@@ -35,7 +35,7 @@ public class SystemPropertiesTests {
         // gradle clean test -Dbrowser=mozilla  // mozilla
     }
 
-    
+
     @Test
     void someTest4() {
         System.out.println(System.getProperty("any_value"));    // null

@@ -54,9 +54,10 @@ tasks.withType(Test) {
     }
 }
 
-// этот блок необходим для аннатации @Tag. Если запустим тесты командой:
-// gradle clean properties_test -DsomeText=Hello
-// то выполнятся только тесты перед которыми есть аннотация @Tag
+/* этот блок необходим для аннатации @Tag. Если запустим тесты командой: gradle clean properties_test -DsomeText=Hello
+   то выполнятся только тесты перед которыми есть аннотация @Tag.
+   Аннотацию @Tag можно применить как к классу, в котором может быть много тестов, так и к отдельному тесту
+ */
 task properties_test(type: Test) {
     useJUnitPlatform{
         includeTags "properties"
@@ -66,5 +67,6 @@ task properties_test(type: Test) {
 task smoke_test(type: Test) {
     useJUnitPlatform{
         includeTags "smoke"
+        // есть еще excludedTags - это те тесты которые мы хотим исключить
     }
 }

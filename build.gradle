@@ -41,13 +41,13 @@ tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 
+
 tasks.withType(Test) {
     systemProperties(System.getProperties())
     useJUnitPlatform()
 
     testLogging {
         lifecycle {
-//            events "started", "failed"
             events "started", "skipped", "failed", "standard_error", "standard_out"
             exceptionFormat "short"
         }
@@ -58,6 +58,7 @@ tasks.withType(Test) {
    то выполнятся только тесты перед которыми есть аннотация @Tag.
    Аннотацию @Tag можно применить как к классу, в котором может быть много тестов, так и к отдельному тесту
  */
+
 task properties_test(type: Test) {
     useJUnitPlatform {
         includeTags "properties"

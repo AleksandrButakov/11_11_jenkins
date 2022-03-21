@@ -51,7 +51,7 @@ public class FirstTestPageObject {
         // адрес удаленного selenoid сервера, где user1 - login, 1234 - password, wd - webdriver
         //Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
         //Configuration.remote = "https://" + user + ":" + password + "@" + remoteUrl;
-        Configuration.remote = "https://" + user;
+        Configuration.remote = "https://" + user + ":" + password;
 
         /*
         -Dpassword=${PASSWORD}

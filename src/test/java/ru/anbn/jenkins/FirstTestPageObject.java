@@ -40,7 +40,7 @@ public class FirstTestPageObject {
     static void beforeAll() {
         String user = System.getProperty("user");
         String password = System.getProperty("password");
-        String remoteUrl = System.getProperty("remoteBrowser");
+        String remoteBrowser = System.getProperty("remoteBrowser");
 
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.browserPosition = ("0x0");
@@ -51,7 +51,7 @@ public class FirstTestPageObject {
         // адрес удаленного selenoid сервера, где user1 - login, 1234 - password, wd - webdriver
         //Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
         //Configuration.remote = "https://" + user + ":" + password + "@" + remoteUrl;
-        Configuration.remote = "https://" + user + ":" + password;
+        Configuration.remote = "https://" + user + ":" + password + "@" + remoteBrowser;
 
         /*
         -Dpassword=${PASSWORD}

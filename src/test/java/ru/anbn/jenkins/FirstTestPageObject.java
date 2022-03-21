@@ -64,6 +64,7 @@ public class FirstTestPageObject {
             Attach.pageSource();
             Attach.browserConsoleLogs();
             Attach.addVideo();
+
         }
 
         @Test
@@ -78,7 +79,7 @@ public class FirstTestPageObject {
                     .setBirthDate(birthDateYear, birthDateMounth, birthDateDay)
                     .setSubjects(subjects)
                     .setHobbies(hobbies)
-                    .downloadPicture(downloadPicture)
+                    //.downloadPicture(downloadPicture)
                     .currentAddress(currentAddress)
                     .selectionState(selectionState)
                     .selectionCity(selectionCity)
@@ -94,7 +95,7 @@ public class FirstTestPageObject {
                     .checkForm(birthDataResult)
                     .checkForm(subjects)
                     .checkForm(hobbies)
-                    .checkForm(downloadPicture)
+                    //.checkForm(downloadPicture)
                     .checkForm(currentAddress)
                     .checkForm(selectionState)
                     .checkForm(selectionCity);

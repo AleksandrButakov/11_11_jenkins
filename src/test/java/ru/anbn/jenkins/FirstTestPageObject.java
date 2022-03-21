@@ -40,7 +40,7 @@ public class FirstTestPageObject {
     static void beforeAll() {
         String user = System.getProperty("user");
         String password = System.getProperty("password");
-        String remoteUrl = System.getProperty("remoteUrl");
+        String remoteUrl = System.getProperty("remoteBrowser");
 
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.browserPosition = ("0x0");
@@ -49,9 +49,15 @@ public class FirstTestPageObject {
         // +++
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
         // адрес удаленного selenoid сервера, где user1 - login, 1234 - password, wd - webdriver
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+        //Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
         //Configuration.remote = "https://" + user + ":" + password + "@" + remoteUrl;
-        Configuration.remote = "https://" + user + ":1234@selenoid.autotests.cloud/wd/hub";
+        Configuration.remote = user;
+
+        /*
+        -Dpassword=${PASSWORD}
+        -DremoteBrowser=${REMOTE_BROWSER}
+         */
+
 
             /* Jenkins не имеет графического интерфейса поэтому для тестирования web интерфейса необходимо
                подключить selenoid

@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import ru.anbn.jenkins.pages.RegistrationPage;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
@@ -36,6 +37,10 @@ public class FirstTestPageObject {
 
         @BeforeAll
         static void beforeAll() {
+            String user = System.getProperty("user");
+            String password = System.getProperty("password");
+            String remoteUrl = System.getProperty("remoteUrl");
+
             Configuration.baseUrl = "https://demoqa.com";
             Configuration.browserPosition = ("0x0");
             Configuration.browserSize = "1920x1080";
@@ -43,7 +48,8 @@ public class FirstTestPageObject {
             // +++
             SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
             // адрес удаленного selenoid сервера, где user1 - login, 1234 - password, wd - webdriver
-            Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+            // Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+            Configuration.remote = "https://" + user + ":" + password + "@" + remoteUrl;
 
             /* Jenkins не имеет графического интерфейса поэтому для тестирования web интерфейса необходимо
                подключить selenoid
